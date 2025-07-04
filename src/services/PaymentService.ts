@@ -223,4 +223,40 @@ export class PaymentService {
 
     return data as Payment[]
   }
+
+  static async getMonthlyRevenue(): Promise<number> {
+    const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString()
+    
+    const { data, error } = await supabase
+      .from('unified_payments')
+      .select('amount')
+      .eq('status', 'completed')
+      .gte('payment_date', startOfMonth)
+
+    if (error) {
+      throw new Error(`Failed to fetch monthly revenue: ${error.message}`)
+    }
+
+    return data?.reduce((sum, payment) => sum + (payment.amount || 0), 0) || 0
+  }
+
+  static async getCount(params?: PaymentFilterParams): Promise<number> {
+    let query = supabase.from('unified_payments').select('*', { count: 'exact', head: true })
+
+    if (params?.search) {
+      query = query.or(`reference_number.ilike.%${params.search}%,notes.ilike.%${params.search}%`)
+    }
+
+    if (params?.status) {
+      query = query.eq('status', params.status)
+    }
+
+    const { count, error } = await query
+
+    if (error) {
+      throw new Error(`Failed to count payments: ${error.message}`)
+    }
+
+    return count || 0
+  }
 }

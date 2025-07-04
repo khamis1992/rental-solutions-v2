@@ -13,53 +13,137 @@ export interface Database {
         Row: {
           id: string
           full_name: string | null
+          phone_number: string | null
           email: string | null
-          phone: string | null
           address: string | null
-          city: string | null
-          state: string | null
-          zip_code: string | null
-          driver_license: string | null
           nationality: string | null
-          notes: string | null
-          status: 'active' | 'inactive' | 'blocked' | 'pending'
-          id_card_image: string | null
+          driver_license: string | null
+          id_document_url: string | null
+          license_document_url: string | null
+          contract_document_url: string | null
+          id_document_expiry: string | null
+          license_document_expiry: string | null
+          document_verification_status: string
+          document_analysis_status: string
+          status: string
+          status_updated_at: string
+          status_notes: string | null
+          role: string
+          profile_completion_score: number
+          portal_username: string | null
+          portal_password: string | null
+          last_login: string | null
+          location_tracking_enabled: boolean
+          location_tracking_consent_date: string | null
+          preferred_communication_channel: string
+          welcome_email_sent: boolean
+          last_document_reminder_sent: string | null
+          is_ai_generated: boolean
+          ai_confidence_score: number | null
+          ai_generated_fields: Json | null
+          needs_review: boolean
+          extracted_data: Json | null
+          analysis_confidence_score: number | null
+          normalized_name: string | null
+          duplicate_review_status: string
+          duplicate_review_date: string | null
+          merged_into: string | null
+          form_data: Json | null
+          last_form_save: string | null
           created_at: string
           updated_at: string
+          notes: string | null
+          id_card_image: string | null
         }
         Insert: {
           id?: string
           full_name?: string | null
+          phone_number?: string | null
           email?: string | null
-          phone?: string | null
           address?: string | null
-          city?: string | null
-          state?: string | null
-          zip_code?: string | null
-          driver_license?: string | null
           nationality?: string | null
-          notes?: string | null
-          status?: 'active' | 'inactive' | 'blocked' | 'pending'
-          id_card_image?: string | null
+          driver_license?: string | null
+          id_document_url?: string | null
+          license_document_url?: string | null
+          contract_document_url?: string | null
+          id_document_expiry?: string | null
+          license_document_expiry?: string | null
+          document_verification_status?: string
+          document_analysis_status?: string
+          status?: string
+          status_updated_at?: string
+          status_notes?: string | null
+          role?: string
+          profile_completion_score?: number
+          portal_username?: string | null
+          portal_password?: string | null
+          last_login?: string | null
+          location_tracking_enabled?: boolean
+          location_tracking_consent_date?: string | null
+          preferred_communication_channel?: string
+          welcome_email_sent?: boolean
+          last_document_reminder_sent?: string | null
+          is_ai_generated?: boolean
+          ai_confidence_score?: number | null
+          ai_generated_fields?: Json | null
+          needs_review?: boolean
+          extracted_data?: Json | null
+          analysis_confidence_score?: number | null
+          normalized_name?: string | null
+          duplicate_review_status?: string
+          duplicate_review_date?: string | null
+          merged_into?: string | null
+          form_data?: Json | null
+          last_form_save?: string | null
           created_at?: string
           updated_at?: string
+          notes?: string | null
+          id_card_image?: string | null
         }
         Update: {
           id?: string
           full_name?: string | null
+          phone_number?: string | null
           email?: string | null
-          phone?: string | null
           address?: string | null
-          city?: string | null
-          state?: string | null
-          zip_code?: string | null
-          driver_license?: string | null
           nationality?: string | null
-          notes?: string | null
-          status?: 'active' | 'inactive' | 'blocked' | 'pending'
-          id_card_image?: string | null
+          driver_license?: string | null
+          id_document_url?: string | null
+          license_document_url?: string | null
+          contract_document_url?: string | null
+          id_document_expiry?: string | null
+          license_document_expiry?: string | null
+          document_verification_status?: string
+          document_analysis_status?: string
+          status?: string
+          status_updated_at?: string
+          status_notes?: string | null
+          role?: string
+          profile_completion_score?: number
+          portal_username?: string | null
+          portal_password?: string | null
+          last_login?: string | null
+          location_tracking_enabled?: boolean
+          location_tracking_consent_date?: string | null
+          preferred_communication_channel?: string
+          welcome_email_sent?: boolean
+          last_document_reminder_sent?: string | null
+          is_ai_generated?: boolean
+          ai_confidence_score?: number | null
+          ai_generated_fields?: Json | null
+          needs_review?: boolean
+          extracted_data?: Json | null
+          analysis_confidence_score?: number | null
+          normalized_name?: string | null
+          duplicate_review_status?: string
+          duplicate_review_date?: string | null
+          merged_into?: string | null
+          form_data?: Json | null
+          last_form_save?: string | null
           created_at?: string
           updated_at?: string
+          notes?: string | null
+          id_card_image?: string | null
         }
       }
       vehicles: {
@@ -389,6 +473,225 @@ export interface Database {
           payment_date?: string | null
           created_at?: string
           updated_at?: string
+        }
+      }
+      agreement_documents: {
+        Row: {
+          id: string
+          lease_id: string
+          document_type: string
+          document_url: string
+          uploaded_by: string | null
+          created_at: string
+          updated_at: string
+          vehicle_id: string | null
+          original_filename: string | null
+          file_size: number | null
+          upload_status: string
+          assignment_method: string
+          matched_agreement_number: string | null
+        }
+        Insert: {
+          id?: string
+          lease_id: string
+          document_type: string
+          document_url: string
+          uploaded_by?: string | null
+          created_at?: string
+          updated_at?: string
+          vehicle_id?: string | null
+          original_filename?: string | null
+          file_size?: number | null
+          upload_status?: string
+          assignment_method?: string
+          matched_agreement_number?: string | null
+        }
+        Update: {
+          id?: string
+          lease_id?: string
+          document_type?: string
+          document_url?: string
+          uploaded_by?: string | null
+          created_at?: string
+          updated_at?: string
+          vehicle_id?: string | null
+          original_filename?: string | null
+          file_size?: number | null
+          upload_status?: string
+          assignment_method?: string
+          matched_agreement_number?: string | null
+        }
+      }
+      ai_payment_analysis: {
+        Row: {
+          id: string
+          payment_id: string
+          analysis_type: string
+          confidence_score: number
+          anomaly_detected: boolean
+          risk_level: string
+          recommendations: Json | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          payment_id: string
+          analysis_type: string
+          confidence_score: number
+          anomaly_detected?: boolean
+          risk_level: string
+          recommendations?: Json | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          payment_id?: string
+          analysis_type?: string
+          confidence_score?: number
+          anomaly_detected?: boolean
+          risk_level?: string
+          recommendations?: Json | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      alerts: {
+        Row: {
+          id: string
+          type: string
+          title: string
+          message: string
+          priority: string
+          status: string
+          user_id: string | null
+          entity_type: string | null
+          entity_id: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          type: string
+          title: string
+          message: string
+          priority: string
+          status?: string
+          user_id?: string | null
+          entity_type?: string | null
+          entity_id?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          type?: string
+          title?: string
+          message?: string
+          priority?: string
+          status?: string
+          user_id?: string | null
+          entity_type?: string | null
+          entity_id?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      drivers: {
+        Row: {
+          id: string
+          customer_id: string
+          license_number: string
+          license_expiry: string
+          status: string
+          location_data: Json | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          customer_id: string
+          license_number: string
+          license_expiry: string
+          status?: string
+          location_data?: Json | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          customer_id?: string
+          license_number?: string
+          license_expiry?: string
+          status?: string
+          location_data?: Json | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      notifications: {
+        Row: {
+          id: string
+          user_id: string
+          type: string
+          title: string
+          message: string
+          read: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          type: string
+          title: string
+          message: string
+          read?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          type?: string
+          title?: string
+          message?: string
+          read?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      audit_logs: {
+        Row: {
+          id: string
+          user_id: string | null
+          action: string
+          table_name: string
+          record_id: string
+          old_values: Json | null
+          new_values: Json | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string | null
+          action: string
+          table_name: string
+          record_id: string
+          old_values?: Json | null
+          new_values?: Json | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string | null
+          action?: string
+          table_name?: string
+          record_id?: string
+          old_values?: Json | null
+          new_values?: Json | null
+          created_at?: string
         }
       }
     }

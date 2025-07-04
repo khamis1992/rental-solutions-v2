@@ -160,4 +160,24 @@ export class VehicleService {
 
     return data as Vehicle
   }
+
+  static async getCount(params?: VehicleFilterParams): Promise<number> {
+    let query = supabase.from('vehicles').select('*', { count: 'exact', head: true })
+
+    if (params?.search) {
+      query = query.or(`make.ilike.%${params.search}%,model.ilike.%${params.search}%,license_plate.ilike.%${params.search}%`)
+    }
+
+    if (params?.status) {
+      query = query.eq('status', params.status)
+    }
+
+    const { count, error } = await query
+
+    if (error) {
+      throw new Error(`Failed to count vehicles: ${error.message}`)
+    }
+
+    return count || 0
+  }
 }

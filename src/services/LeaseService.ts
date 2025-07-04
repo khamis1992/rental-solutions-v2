@@ -198,4 +198,24 @@ export class LeaseService {
 
     return data as Lease
   }
+
+  static async getCount(params?: LeaseFilterParams): Promise<number> {
+    let query = supabase.from('leases').select('*', { count: 'exact', head: true })
+
+    if (params?.search) {
+      query = query.or(`profiles.full_name.ilike.%${params.search}%,vehicles.license_plate.ilike.%${params.search}%`)
+    }
+
+    if (params?.status) {
+      query = query.eq('status', params.status)
+    }
+
+    const { count, error } = await query
+
+    if (error) {
+      throw new Error(`Failed to count leases: ${error.message}`)
+    }
+
+    return count || 0
+  }
 }
